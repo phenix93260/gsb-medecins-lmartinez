@@ -29,7 +29,7 @@ class DAO {
 
             while (rs.next()) {
 
-                Collection<Med> medecins = new HashSet<Med>();
+                Collection<Med> medecins = new TreeSet<Med>();
                 
                 Statement req2;
                 req2 = con.createStatement();
