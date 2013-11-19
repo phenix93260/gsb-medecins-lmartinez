@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 4 nov. 2013, 11:49:34
-    Author     : lmartinez
+    Created on : 12 nov. 2013, 15:24:17
+    Author     : tvuong
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title></title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="Control?choix=lDep" method="post">
+            <input type="submit" value="Liste des médecins par département"</input>
+        </form>
+        <form action="Control?choix=lMep" method="post">
+            <input type="submit" value="Liste des médecins par nom"</input>
+        </form>
     </body>
 </html>
