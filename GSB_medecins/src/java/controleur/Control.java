@@ -14,24 +14,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Pays;
+import modele.Connect;
 import modele.Dep;
 import modele.Med;
-import modele.Connect;
-
+import modele.Pays;
 
 /**
  *
  * @author lmartinez
  */
-
 public class Control extends HttpServlet {
 
     private Pays p;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        p = new Pays();//instancie les objets utiles 
+        p = new Pays(); //instancie les objets utiles 
     }
 
     public void destroy() {
@@ -50,48 +48,31 @@ public class Control extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String page;
-//       String choix = request.getParameter("choix");
-        Collection<Dep>lesDeps=p.getLesDeps();
-        request.setAttribute("lesDeps", lesDeps);
-        page="listeDep.jsp";
-        
-//        if (choix !=null){
-//           String departement=request.getParameter("departement");
-//           Emplacement emp=b.getLeType(choix).getEmpDispo(nomAbonne);
-//           if(emp==null)
-//           {
-//               page="empNonDispo.jsp";
-//           }
-//           else
-//           {
-//             request.setAttribute("code", emp.getCode());
-//             request.setAttribute("prix", b.getLeType(choix).getPrix());
-//             page = "empDispo.jsp";  
-//           }
-//           
-//           
-//            
-//            
-//        }
-//        else{
-//        Map<String, Type> l = b.getLesTypes();
-//        request.setAttribute("listeDep", l);
-//        request.setAttribute("leDep", p.getLesDeps());
-//        request.setAttribute("lieu", b.getLieu());
-//        request.setAttribute("date", b.getDate());
-//        
-//        page = "index.jsp";
-//        }
-//        
-        
+        String page = null;
+        String choix = request.getParameter("choix");
+        String numDep = request.getParameter("numDep");
+
+        if (choix != null) {
+            if (choix.equals("lDep")) {
+                if (numDep == null) {
+                    Collection<Dep> d = p.getLesDeps();
+                    request.setAttribute("listeDeps", d);
+                    page = "listeDep.jsp";
+                } else {
+                    Collection<Med> m = p.getLeDep(numDep).getLesMed();
+                    request.setAttribute("listeMeds", m);
+                    page = "listMedParDep.jsp";
+                }
+            } else if (choix.equals("lMed")) {
+                page = "listeMed.jsp";
+            }
+        } else {
+            page = "index.jsp";
+        }
         request.getRequestDispatcher(page).forward(request, response);
-
-
-
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP
      * <code>GET</code> method.
