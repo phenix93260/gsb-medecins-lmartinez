@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Map;
+import java.util.TreeSet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +52,8 @@ public class Control extends HttpServlet {
         String page = null;
         String choix = request.getParameter("choix");
         String numDep = request.getParameter("numDep");
+        String lMedNom= request.getParameter("lMedNom");
+        String LSpe = request.getParameter("lSpe");
 
         if (choix != null) {
             if (choix.equals("lDep")) {
@@ -64,8 +67,33 @@ public class Control extends HttpServlet {
                     page = "listMedParDep.jsp";
                 }
             } else if (choix.equals("lMed")) {
+                if(lMedNom==null){
                 page = "listeMed.jsp";
+                }
+                else{
+                    Collection <Med>medParNom= new TreeSet<Med>();
+                    for(Dep unDep :p.getLesDeps()){
+                        for(Med unMed : unDep.getLesMed()){
+                            if(unMed.getNom().startsWith(lMedNom)){
+                                medParNom.add(unMed);
+                            }
+                        }
+                    }
+                    request.setAttribute("medParNom", medParNom);
+                    page="listMedParNom.jsp";
+                }
             }
+            else if (choix.equals ("lSpe")){
+                if(LSpe==null){
+                page="listeSpe.jsp";
+                }
+                else{
+                    Collection<Med>medParSpe = new TreeSet<Med>();
+                    
+                    
+                }
+            }
+            
         } else {
             page = "index.jsp";
         }
