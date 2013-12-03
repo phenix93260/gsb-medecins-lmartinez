@@ -29,14 +29,7 @@ class DAO {
 
             while (rs.next()) {
 
-//                Collection<Med> medecins = new TreeSet<Med>();
-//                
-//                Statement req2;
-//                req2 = con.createStatement();
-//                ResultSet rs2 = req2.executeQuery("select * from medecin where departement =" + rs.getString("departement"));
-//                while (rs2.next()) {
-//                    medecins.add(new Med(rs2.getString("nom") , rs2.getString("prenom"),rs2.getString("adresse"),rs2.getString("tel"),rs2.getString("specialitecomplementaire"),rs2.getString("id")));
-//                }
+//               
                 departements.add(new Dep(rs.getString("departement")));
 
 
