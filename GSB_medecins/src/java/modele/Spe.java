@@ -11,13 +11,13 @@ import java.util.TreeSet;
  *
  * @author lmartinez
  */
-public class Dep implements Comparable<Dep> {
+public class Spe implements Comparable<Spe> {
     
-    private String num;
+    private String nom;
     private Collection<Med>lesMed= new TreeSet<Med>();
 
-    public Dep(String num) {
-        this.num = num;
+    public Spe(String nom  ) {
+        this.nom = nom;
         
     }
 
@@ -25,14 +25,14 @@ public class Dep implements Comparable<Dep> {
         return lesMed;
     }
 
-    public String getNum() {
-        return num;
+    public String getNom() {
+        return nom;
     }
     
 
     @Override
-    public int compareTo(Dep t) {
-        return num.compareTo(t.num);
+    public int compareTo(Spe t) {
+        return nom.compareTo(t.nom);
     }
 
     void addUnMed(Med unMed) {

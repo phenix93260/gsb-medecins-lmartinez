@@ -16,13 +16,13 @@
     <body>
         <jsp:include page="menu.jsp"/>
         <div id="contenu">
-        <h1>Liste des département</h1>
+        <h1>Liste des spécialités</h1>
         <br/> 
-        <form action="Control?choix=lDep" method="post">
-            <select name ="numDep">
+        <form action="Control?choix=lSpe" method="post">
+            <select name ="nomSpe">
                 Departement:
-                <c:forEach var="leDep" items="${listeDeps}">
-                    <option value="${leDep.num}">${leDep.num}</option>
+                <c:forEach var="laSpe" items="${listeSpes}">
+                    <option value="${laSpe.nom}">${laSpe.nom}</option>
                 </c:forEach>
             </select>
             <input type="submit" value="Valider">

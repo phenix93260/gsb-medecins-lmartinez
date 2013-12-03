@@ -52,9 +52,9 @@ public class Control extends HttpServlet {
         String page = null;
         String choix = request.getParameter("choix");
         String numDep = request.getParameter("numDep");
-        String lMedNom= request.getParameter("lMedNom");
-        String LSpe = request.getParameter("lSpe");
-
+        String lMedNom = request.getParameter("lMedNom");
+        String lSpe = request.getParameter("lSpe");
+        String nomSpe = request.getParameter("nomSpe");
         if (choix != null) {
             if (choix.equals("lDep")) {
                 if (numDep == null) {
@@ -67,33 +67,34 @@ public class Control extends HttpServlet {
                     page = "listMedParDep.jsp";
                 }
             } else if (choix.equals("lMed")) {
-                if(lMedNom==null){
-                page = "listeMed.jsp";
-                }
-                else{
-                    Collection <Med>medParNom= new TreeSet<Med>();
-                    for(Dep unDep :p.getLesDeps()){
-                        for(Med unMed : unDep.getLesMed()){
-                            if(unMed.getNom().startsWith(lMedNom)){
+                if (lMedNom == null) {
+                    page = "listeMed.jsp";
+                } else {
+                    Collection<Med> medParNom = new TreeSet<Med>();
+                    for (Dep unDep : p.getLesDeps()) {
+                        for (Med unMed : unDep.getLesMed()) {
+                            if (unMed.getNom().startsWith(lMedNom)) {
                                 medParNom.add(unMed);
                             }
                         }
                     }
                     request.setAttribute("medParNom", medParNom);
-                    page="listMedParNom.jsp";
+                    page = "listMedParNom.jsp";
+                }
+            } else if (choix.equals("lSpe")) {
+                if (nomSpe == null) {
+                    request.setAttribute("listeSpes", p.getLesSpes());
+                    page = "listeSpe.jsp";
+                } else {
+                    Collection<Med> medParSpe = p.getLaSpe(nomSpe).getLesMed();
+                    request.setAttribute("listeMeds",medParSpe);
+                    page="listMedParSpe.jsp";
+                    
+
+
                 }
             }
-            else if (choix.equals ("lSpe")){
-                if(LSpe==null){
-                page="listeSpe.jsp";
-                }
-                else{
-                    Collection<Med>medParSpe = new TreeSet<Med>();
-                    
-                    
-                }
-            }
-            
+
         } else {
             page = "index.jsp";
         }
