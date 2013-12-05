@@ -19,12 +19,12 @@ public class Connect {
     private static Connection open() {
 
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Pilote mal installé..." + e);
         }
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://lucie/medecin", "lmartinez", "xxx");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medecins","root","");
         } catch (SQLException e) {
             System.out.println("Erreur SQL :" + e);
         }
