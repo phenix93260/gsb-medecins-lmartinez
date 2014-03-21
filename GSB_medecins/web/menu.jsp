@@ -3,6 +3,7 @@
     Created on : 2 déc. 2013, 11:55:55
     Author     : lmartinez
 --%>
+<!-- commentaire -->
 <div id="menuGauche">
     <form action="Control?choix=lDep" method="post">
         <input type="submit" value="Liste des médecins par département"</input>
